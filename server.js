@@ -1,4 +1,4 @@
-ar http = require('http')
+var http = require('http')
 var fs = require('fs')
 var url = require('url')
 var port = process.argv[2]
@@ -19,31 +19,25 @@ var server = http.createServer(function(request, response){
 
   /******** 从这里开始看，上面不要看 ************/
 
-  console.log('有个傻子发请求过来啦！路径（带查询参数）为：' + pathWithQuery)
+  console.log('有个傻子发请求过来啦！路径(带查询参数)为：' + pathWithQuery)
 
   if(path === '/'){
     response.statusCode = 200
-    response.setHeader('Content-Type', 'text/html;charset=utf-8')
+    response.setHeader('Content-Type', 'text/html;charset=utf-8');
     response.write(`
-          <!DOCTYPE html>
-          <head>
-          <link rel="stylesheet" href="/x">
-          </head>
-          <body>
-          <h1>二哈</h1>
-          <script src="/y"></script>
-          </body>
-    `)
-    response.end()
-  } else if(path === '/x'){
+    <!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="/style">
+    </head>
+    <body>
+        <h1>狗头保命</h1>
+    </body>
+    `);
+    response.end();
+  } else if(path === '/style'){
     response.statusCode = 200
     response.setHeader('Content-Type', 'text/css;charset=utf-8')
-    response.write(`body{color: red;}`)
-    response.end()
-  } else if(path === '/y'){
-    response.statusCode = 200
-    response.setHeader('Content-Type','text/javascript;charset=utf-8')
-    response.write(`这是js内容`)
+    response.write(`h1{color: red;}`)
     response.end()
   } else {
     response.statusCode = 404
